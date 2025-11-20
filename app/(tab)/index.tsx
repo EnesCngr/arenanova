@@ -30,7 +30,7 @@ export default function Index() {
         backgroundColor: 'rgba(167, 139, 250, 0.4)'
       }} />
 
-      {/* Action Sheet */}
+      {/* Action Sheet that shows the login form */}
       <ActionSheet
         ref={sheetRef}
         closeOnTouchBackdrop={false}
@@ -39,7 +39,10 @@ export default function Index() {
       >
         <View className="p-5">
           {/* Email input */}
-          <View className="h-14 w-full bg-white rounded-xl px-4 justify-center mb-4">
+         
+        <Text className='font-bold text-lg mb-2'>Email</Text>
+          <View className="h-14 w-full bg-white rounded-xl px-4 justify-center mb-3 border-2 border-gray-300">
+  
             <TextInput
               placeholder="Email"
               placeholderTextColor="gray"
@@ -48,7 +51,9 @@ export default function Index() {
           </View>
           
           {/* Password input */}
-          <View className="h-14 w-full bg-white rounded-xl px-4 justify-center mb-4">
+           <Text className='font-bold text-lg mb-2'>Password</Text>
+          <View className="h-14 w-full bg-white rounded-xl px-4 justify-center mb-2 border-2 border-gray-300">
+            
             <TextInput
               placeholder="Password"
               placeholderTextColor="gray"
@@ -58,7 +63,7 @@ export default function Index() {
           </View>
           
           {/* Login Button */}
-          <TouchableOpacity className="bg-blue-600 h-14 rounded-xl items-center justify-center mt-4">
+          <TouchableOpacity className="bg-blue-600 h-14 rounded-xl items-center justify-center mt-6">
             <Text className="text-white text-lg font-semibold">Login</Text>
           </TouchableOpacity>
           
