@@ -10,10 +10,6 @@ export default function RootLayout() {
         name="(tabs)"
         options={{ headerShown: false }}
       />
-      <Stack.Screen 
-        name="food/[id]"
-        options={{ headerShown: false }}
-      />
     </Stack>
   );
 }
