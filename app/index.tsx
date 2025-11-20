@@ -1,17 +1,17 @@
-import { Text, View } from "react-native";
+import { Stack } from "expo-router";
+import './Global.css';
 
-export default function Index() {
-  return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
-    </View>
-  );
+export default function RootLayout() {
+  return <Stack>
+
+      <Stack.Screen  name="(tabs)"
+      options = {{headerShown:false}
+      }/>
+      
+      <Stack.Screen  name="food/[id]"
+      options = {{headerShown:false}
+      }/>
+      
+  </Stack>
 }
 
-//asdagsafsdsd 
