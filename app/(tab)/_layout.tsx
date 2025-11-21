@@ -9,7 +9,8 @@ const _layout = () => {
                 name="index"
                 options={{
                     title: 'index',
-                    headerShown: false
+                    headerShown: false,
+                    tabBarStyle: { display: 'none' }
                 }}
             />
 

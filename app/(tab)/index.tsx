@@ -1,11 +1,12 @@
 import { ResizeMode, Video } from 'expo-av';
-import { router } from "expo-router";
+import { useRouter } from 'expo-router';
 import React, { useEffect, useRef } from "react";
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import ActionSheet from "react-native-actions-sheet";
 
 export default function Index() {
   const sheetRef = useRef<any>(null);
+  const router = useRouter();
 
   // Open ActionSheet automatically on screen load
   useEffect(() => {
@@ -28,8 +29,24 @@ export default function Index() {
         position: 'absolute',
         width: '100%',
         height: '100%',
-        backgroundColor: 'rgba(250, 139, 204, 0.4)'
+        backgroundColor: 'rgba(157, 121, 177, 0.7)'
       }} />
+
+      <View className='flex-1 justify-center items-center' style={{ paddingBottom: 100 }}>
+        <Text className='text-4xl font-bold text-white mb-4'>YUMFEST</Text>    
+      </View>
+
+      {/* Button to open ActionSheet */}
+      <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'center', paddingBottom: 100 }}>
+        <Text className='font-bold mb-2'>
+          welcome to my app
+        </Text>
+        <TouchableOpacity 
+          onPress={() => sheetRef.current?.show()}
+          className="bg-black px-8 py-4 rounded-2xl">
+          <Text className="text-white text-xl font-bold">let get started</Text>
+        </TouchableOpacity>
+      </View>
 
       {/* Action Sheet that shows the login form */}
       <ActionSheet
@@ -69,7 +86,10 @@ export default function Index() {
           </TouchableOpacity>
           
           {/* Sign Up Button */}
-          <TouchableOpacity className="bg-gray-200 h-14 rounded-xl items-center justify-center mt-2" onPress={() => router.push("/(tab)/signin")}>
+          <TouchableOpacity 
+            className="bg-gray-200 h-14 rounded-xl items-center justify-center mt-2" 
+            onPress={() => router.push("/(tab)/signin")}
+          >
             <Text className="text-black text-lg font-semibold">Sign Up</Text>
           </TouchableOpacity>
         </View>
