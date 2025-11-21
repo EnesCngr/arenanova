@@ -1,4 +1,5 @@
 import { ResizeMode, Video } from 'expo-av';
+import { router } from "expo-router";
 import React, { useEffect, useRef } from "react";
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import ActionSheet from "react-native-actions-sheet";
@@ -27,7 +28,7 @@ export default function Index() {
         position: 'absolute',
         width: '100%',
         height: '100%',
-        backgroundColor: 'rgba(167, 139, 250, 0.4)'
+        backgroundColor: 'rgba(250, 139, 204, 0.4)'
       }} />
 
       {/* Action Sheet that shows the login form */}
@@ -68,7 +69,7 @@ export default function Index() {
           </TouchableOpacity>
           
           {/* Sign Up Button */}
-          <TouchableOpacity className="bg-gray-200 h-14 rounded-xl items-center justify-center mt-2">
+          <TouchableOpacity className="bg-gray-200 h-14 rounded-xl items-center justify-center mt-2" onPress={() => router.push("/(tab)/signin")}>
             <Text className="text-black text-lg font-semibold">Sign Up</Text>
           </TouchableOpacity>
         </View>
