@@ -1,17 +1,51 @@
 import { ResizeMode, Video } from 'expo-av';
 import { useRouter } from 'expo-router';
-import React, { useEffect, useRef } from "react";
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import React, { useEffect, useRef, useState } from "react";
+import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import ActionSheet from "react-native-actions-sheet";
+import { signIn } from '../../lib/auth';
 
 export default function Index() {
   const sheetRef = useRef<any>(null);
   const router = useRouter();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
   // Open ActionSheet automatically on screen load
   useEffect(() => {
     sheetRef.current?.show();
   }, []);
+
+  const handleLogin = async () => {
+    // Validation
+    if (!email || !password) {
+      Alert.alert('Missing Information', 'Please enter both email and password');
+      return;
+    }
+
+    // Basic email validation
+    if (!email.includes('@')) {
+      Alert.alert('Invalid Email', 'Please enter a valid email address');
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const user = await signIn(email, password);
+      console.log('Login successful for user:', user.email);
+      // Clear form
+      setEmail('');
+      setPassword('');
+      // Navigate to menu screen
+      router.push('/(tab)/menutab');
+    } catch (error: any) {
+      console.error('Login error:', error.message);
+      Alert.alert('Login Failed', error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <View style={{ flex: 1 }}>
@@ -60,29 +94,39 @@ export default function Index() {
          
         <Text className='font-bold text-lg mb-2'>Email</Text>
           <View className="h-14 w-full bg-white rounded-xl px-4 justify-center mb-3 border-2 border-gray-300">
-  
             <TextInput
               placeholder="Email"
               placeholderTextColor="gray"
               className="text-base"
+              value={email}
+              onChangeText={setEmail}
+              autoCapitalize="none"
+              keyboardType="email-address"
             />
           </View>
           
           {/* Password input */}
            <Text className='font-bold text-lg mb-2'>Password</Text>
           <View className="h-14 w-full bg-white rounded-xl px-4 justify-center mb-2 border-2 border-gray-300">
-            
             <TextInput
               placeholder="Password"
               placeholderTextColor="gray"
               secureTextEntry
               className="text-base"
+              value={password}
+              onChangeText={setPassword}
             />
           </View>
           
           {/* Login Button */}
-          <TouchableOpacity className="bg-blue-600 h-14 rounded-xl items-center justify-center mt-6">
-            <Text className="text-white text-lg font-semibold">Login</Text>
+          <TouchableOpacity 
+            className="bg-blue-600 h-14 rounded-xl items-center justify-center mt-6"
+            onPress={handleLogin}
+            disabled={loading}
+          >
+            <Text className="text-white text-lg font-semibold">
+              {loading ? 'Logging in...' : 'Login'}
+            </Text>
           </TouchableOpacity>
           
           {/* Sign Up Button */}
