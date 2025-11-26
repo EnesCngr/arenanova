@@ -1,9 +1,10 @@
 import { ResizeMode, Video } from 'expo-av';
 import { useRouter } from 'expo-router';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import React, { useEffect, useRef, useState } from "react";
 import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import ActionSheet from "react-native-actions-sheet";
-import { signIn } from '../../lib/auth';
+import { auth } from '../../firebaseAuthConfig';
 
 export default function Index() {
   const sheetRef = useRef<any>(null);
@@ -17,35 +18,16 @@ export default function Index() {
     sheetRef.current?.show();
   }, []);
 
-  const handleLogin = async () => {
-    // Validation
-    if (!email || !password) {
-      Alert.alert('Missing Information', 'Please enter both email and password');
-      return;
-    }
-
-    // Basic email validation
-    if (!email.includes('@')) {
-      Alert.alert('Invalid Email', 'Please enter a valid email address');
-      return;
-    }
-
-    setLoading(true);
-    try {
-      const user = await signIn(email, password);
-      console.log('Login successful for user:', user.email);
-      // Clear form
-      setEmail('');
-      setPassword('');
-      // Navigate to menu screen
+  const handleLogin = () => {
+    signInWithEmailAndPassword(auth, email, password);
+    const user = auth.currentUser;
+    if (user) { 
+      Alert.alert('Success', 'Logged in successfully!');
       router.push('/(tab)/menutab');
-    } catch (error: any) {
-      console.error('Login error:', error.message);
-      Alert.alert('Login Failed', error.message);
-    } finally {
-      setLoading(false);
+    } else {
+      Alert.alert('Error', 'Invalid email or password');
     }
-  };
+  }
 
   return (
     <View style={{ flex: 1 }}>
@@ -121,7 +103,6 @@ export default function Index() {
           {/* Login Button */}
           <TouchableOpacity 
             className="bg-blue-600 h-14 rounded-xl items-center justify-center mt-6"
-            onPress={handleLogin}
             disabled={loading}
           >
             <Text className="text-white text-lg font-semibold">

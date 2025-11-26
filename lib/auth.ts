@@ -10,9 +10,30 @@ import { auth } from '../firebaseAuthConfig';
 export const signUp = async (email: string, password: string): Promise<User> => {
   try {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    console.log('User account created & signed in!', userCredential.user.uid);
     return userCredential.user;
   } catch (error: any) {
-    throw new Error(error.message);
+    // Handle specific Firebase Auth error codes
+    let errorMessage = 'An error occurred during signup';
+    
+    switch (error.code) {
+      case 'auth/email-already-in-use':
+        errorMessage = 'This email address is already in use';
+        break;
+      case 'auth/invalid-email':
+        errorMessage = 'Invalid email address format';
+        break;
+      case 'auth/weak-password':
+        errorMessage = 'Password is too weak. Use at least 6 characters';
+        break;
+      case 'auth/network-request-failed':
+        errorMessage = 'Network error. Check your connection';
+        break;
+      default:
+        errorMessage = error.message;
+    }
+    
+    throw new Error(errorMessage);
   }
 };
 
@@ -60,6 +81,7 @@ export const signIn = async (email: string, password: string): Promise<User> => 
 export const logOut = async (): Promise<void> => {
   try {
     await signOut(auth);
+    console.log('User signed out successfully');
   } catch (error: any) {
     throw new Error(error.message);
   }
