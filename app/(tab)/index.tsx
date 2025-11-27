@@ -18,14 +18,47 @@ export default function Index() {
     sheetRef.current?.show();
   }, []);
 
-  const handleLogin = () => {
-    signInWithEmailAndPassword(auth, email, password);
-    const user = auth.currentUser;
-    if (user) { 
+  const handleLogin = async () => {
+    if (!email || !password) {
+      Alert.alert('Error', 'Please fill in all fields');
+      return;
+    }
+
+    setLoading(true);
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
       Alert.alert('Success', 'Logged in successfully!');
       router.push('/(tab)/menutab');
-    } else {
-      Alert.alert('Error', 'Invalid email or password');
+    } catch (error: any) {
+      let errorMessage = 'Login failed';
+      switch (error.code) {
+        case 'auth/invalid-email':
+          errorMessage = 'Invalid email address format';
+          break;
+        case 'auth/user-disabled':
+          errorMessage = 'This account has been disabled';
+          break;
+        case 'auth/user-not-found':
+          errorMessage = 'No account found with this email';
+          break;
+        case 'auth/wrong-password':
+          errorMessage = 'Incorrect password';
+          break;
+        case 'auth/invalid-credential':
+          errorMessage = 'Invalid email or password';
+          break;
+        case 'auth/too-many-requests':
+          errorMessage = 'Too many failed attempts. Please try again later';
+          break;
+        case 'auth/network-request-failed':
+          errorMessage = 'Network error. Check your connection';
+          break;
+        default:
+          errorMessage = error.message;
+      }
+      Alert.alert('Login Failed', errorMessage);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -101,8 +134,9 @@ export default function Index() {
           </View>
           
           {/* Login Button */}
-          <TouchableOpacity 
+          <TouchableOpacity
             className="bg-blue-600 h-14 rounded-xl items-center justify-center mt-6"
+            onPress={handleLogin}
             disabled={loading}
           >
             <Text className="text-white text-lg font-semibold">
