@@ -1,19 +1,21 @@
 import { ResizeMode, Video } from 'expo-av';
 import { useRouter } from 'expo-router';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
 import React, { useState } from 'react';
 import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { auth } from '../firebasedConfig';
+import { signUp } from '../lib/auth';
 
 export default function Signup() {
   const router = useRouter();
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleSignUp = async () => {
-    if (!email || !password || !confirmPassword) {
+    if (!firstName || !lastName || !email || !password || !confirmPassword) {
       Alert.alert('Error', 'Please fill in all fields.');
       return;
     }
@@ -28,7 +30,11 @@ export default function Signup() {
 
     setLoading(true);
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      await signUp(email, password, {
+        firstName,
+        lastName,
+        phone,
+      });
       Alert.alert('Success', 'Account created successfully!');
       // Login successful, redirect to Home tabs
       router.replace('/(tabs)/home'); 
@@ -57,8 +63,27 @@ export default function Signup() {
         <Text className="text-4xl font-bold text-white mb-2 text-center">Join Us</Text>
         <Text className="text-gray-300 mb-8 text-center">Enter the world of Yumfest</Text>
 
-        {/* Email */}
+        {/* Form Fields */}
         <View className="space-y-4">
+            {/* First Name */}
+            <TextInput
+            placeholder="First Name"
+            placeholderTextColor="#9ca3af"
+            className="bg-white/90 text-gray-800 p-4 rounded-xl border border-white/30 text-base"
+            value={firstName}
+            onChangeText={setFirstName}
+            />
+
+            {/* Last Name */}
+            <TextInput
+            placeholder="Last Name"
+            placeholderTextColor="#9ca3af"
+            className="bg-white/90 text-gray-800 p-4 rounded-xl border border-white/30 text-base"
+            value={lastName}
+            onChangeText={setLastName}
+            />
+
+            {/* Email */}
             <TextInput
             placeholder="Email Address"
             placeholderTextColor="#9ca3af"
@@ -67,6 +92,16 @@ export default function Signup() {
             onChangeText={setEmail}
             autoCapitalize="none"
             keyboardType="email-address"
+            />
+
+            {/* Phone */}
+            <TextInput
+            placeholder="Phone Number (optional)"
+            placeholderTextColor="#9ca3af"
+            className="bg-white/90 text-gray-800 p-4 rounded-xl border border-white/30 text-base"
+            value={phone}
+            onChangeText={setPhone}
+            keyboardType="phone-pad"
             />
 
             {/* Password */}

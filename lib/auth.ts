@@ -4,14 +4,34 @@ import {
     signOut,
     User
 } from 'firebase/auth';
-import { auth } from '../firebasedConfig';
+import { doc, setDoc } from 'firebase/firestore';
+import { auth, db } from '../firebasedConfig';
 
-// Sign up new user
-export const signUp = async (email: string, password: string): Promise<User> => {
+// Sign up new user and save to database
+export const signUp = async (
+  email: string, 
+  password: string, 
+  userData?: { firstName?: string; lastName?: string; phone?: string }
+): Promise<User> => {
   try {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    console.log('User account created & signed in!', userCredential.user.uid);
-    return userCredential.user;
+    const user = userCredential.user;
+    
+    console.log('User account created & signed in!', user.uid);
+    
+    // Save user profile to Firestore
+    await setDoc(doc(db, 'users', user.uid), {
+      uid: user.uid,
+      email: user.email,
+      firstName: userData?.firstName || '',
+      lastName: userData?.lastName || '',
+      phone: userData?.phone || '',
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    });
+    
+    console.log('User profile saved to database');
+    return user;
   } catch (error: any) {
     // Handle specific Firebase Auth error codes
     let errorMessage = 'An error occurred during signup';
