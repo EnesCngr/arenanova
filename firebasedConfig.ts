@@ -8,13 +8,13 @@ import { getFirestore } from "firebase/firestore";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyDTm74TSt943xPMb9hJ5CzQonA-w5yiXLY",
-  authDomain: "fest-88f5b.firebaseapp.com",
-  projectId: "fest-88f5b",
-  storageBucket: "fest-88f5b.firebasestorage.app",
-  messagingSenderId: "460271745646",
-  appId: "1:460271745646:web:7575943d9e37abbf0d047f",
-  measurementId: "G-HQSBZM2CVL"
+  apiKey: "AIzaSyAgK-tUwoNmGq0fGDmhnl6pvhcJZ_pyiBE",
+  authDomain: "festivalapp-6d999.firebaseapp.com",
+  projectId: "festivalapp-6d999",
+  storageBucket: "festivalapp-6d999.firebasestorage.app",
+  messagingSenderId: "690109464502",
+  appId: "1:690109464502:web:b74bc014018229654d4b17",
+  measurementId: "G-HBNVCFKV4K"
 };
 
 // Initialize Firebase (or reuse existing app to avoid duplicate-app errors)
