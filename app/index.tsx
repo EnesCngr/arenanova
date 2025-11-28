@@ -19,6 +19,10 @@ export default function Index() {
       return;
     }
 
+    const handleGuestContinue = () => {
+      router.replace('/(tabs)/home');
+    }
+
     setLoading(true);
     try {
       await signInWithEmailAndPassword(auth, email, password);
@@ -104,6 +108,16 @@ export default function Index() {
           >
             <Text className="text-white text-lg font-bold">
               {loading ? 'Logging in...' : 'Login'}
+            </Text>
+          </TouchableOpacity>
+
+               <TouchableOpacity 
+            className="bg-purple-600 h-14 rounded-xl items-center justify-center shadow-md shadow-purple-200"
+            onPress={handleLogin}
+            disabled={loading}
+          >
+            <Text className="text-white text-lg font-bold">
+              contiune as a guest
             </Text>
           </TouchableOpacity>
           

@@ -7,5 +7,7 @@ export default function Home() {
       <Text className="text-2xl font-bold text-gray-800">Welcome! 👋</Text>
       <Text className="text-gray-500 mt-2">Home Feed</Text>
     </SafeAreaView>
+
+    
   );
 }
