@@ -3,7 +3,7 @@ import { useRouter } from 'expo-router';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import React, { useState } from 'react';
 import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { auth } from '../firebaseAuthConfig'; // Check file path
+import { auth } from '../firebasedConfig';
 
 export default function Signup() {
   const router = useRouter();
@@ -59,7 +59,6 @@ export default function Signup() {
 
         {/* Email */}
         <View className="space-y-4">
-          <Text className="text-white text-lg font-semibold">Email</Text>
             <TextInput
             placeholder="Email Address"
             placeholderTextColor="#9ca3af"
@@ -71,7 +70,6 @@ export default function Signup() {
             />
 
             {/* Password */}
-            <Text className="text-white text-lg font-semibold">Password</Text>
             <TextInput
             placeholder="Password"
             placeholderTextColor="#9ca3af"
@@ -82,7 +80,6 @@ export default function Signup() {
             />
 
             {/* Confirm Password */}
-            <Text className="text-white text-lg font-semibold">Confirm Password</Text>
             <TextInput
             placeholder="Confirm Password"
             placeholderTextColor="#9ca3af"

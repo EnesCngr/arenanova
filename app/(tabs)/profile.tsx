@@ -3,7 +3,7 @@ import { useRouter } from 'expo-router';
 import { signOut } from 'firebase/auth';
 import { Alert, Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { auth } from '../../firebaseAuthConfig'; // Check file path
+import { auth } from '../../firebasedConfig';
 
 export default function Profile() {
   const router = useRouter();

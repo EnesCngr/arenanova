@@ -4,7 +4,7 @@ import {
     signOut,
     User
 } from 'firebase/auth';
-import { auth } from '../firebaseAuthConfig';
+import { auth } from '../firebasedConfig';
 
 // Sign up new user
 export const signUp = async (email: string, password: string): Promise<User> => {

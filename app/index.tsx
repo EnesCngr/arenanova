@@ -1,10 +1,9 @@
 import { ResizeMode, Video } from 'expo-av';
 import { useRouter } from 'expo-router';
-import { signInWithEmailAndPassword } from 'firebase/auth';
 import React, { useRef, useState } from "react";
 import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import ActionSheet, { ActionSheetRef } from "react-native-actions-sheet";
-import { auth } from '../firebaseAuthConfig'; // Check file path
+import { signIn } from '../lib/auth';
 
 export default function Index() {
   const sheetRef = useRef<ActionSheetRef>(null);
@@ -25,7 +24,7 @@ export default function Index() {
 
     setLoading(true);
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      await signIn(email, password);
       // If login successful, go to home tab
       router.replace('/(tabs)/home'); 
     } catch (error: any) {
