@@ -10,35 +10,35 @@ const RESTAURANTS = [
     name: 'Pizza Hut',
     storeid: 'pizza',
     category: 'Italian • Pizza',
-    image: 'https://via.placeholder.com/150?text=Pizza',
+    image: require('../../photo/pizza.jpeg'),
   },
   {
     id: '2',
     name: 'Sushi Express',
     storeid: 'sushi',
     category: 'Japanese • Sushi',
-    image: 'https://via.placeholder.com/150?text=Sushi',
+    image: require('../../photo/sushi.jpeg'),
   },
   {
     id: '3',
     name: 'Cafe Bliss',
     storeid: 'cafe',
     category: 'Coffee • Cafe',
-    image: 'https://via.placeholder.com/150?text=Cafe',
+    image: require('../../photo/coffe.jpeg'),
   },
   {
     id: '4',
     name: 'Ice Cream Dream',
     storeid: 'ice',
     category: 'Dessert • Ice Cream',
-    image: 'https://via.placeholder.com/150?text=IceCream',
+    image: require('../../photo/mcice.jpeg'),
   },
   {
     id: '5',
     name: 'Burger Kingdom',
     storeid: 'burger',
     category: 'American • Burgers',
-    image: 'https://via.placeholder.com/150?text=Burger',
+    image: require('../../photo/burger.jpeg'),
   },
 ];
 
@@ -76,10 +76,12 @@ export default function Home() {
             activeOpacity={0.8}
             className="bg-white rounded-2xl mb-4 overflow-hidden"
           >
-            <Image
-              source={{ uri: item.image }}
-              className="w-full h-40"
-            />
+            <View style={{ width: '100%', aspectRatio: 16/11, overflow: 'hidden' }}>
+              <Image
+                source={item.image}
+                style={{ width: '100%', height: '100%', resizeMode: 'stretch' }}
+              />
+            </View>
 
             <View className="p-4">
               <Text className="text-lg font-bold text-black">

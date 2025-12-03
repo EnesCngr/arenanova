@@ -95,10 +95,21 @@ export default function MENU() {
           <Ionicons name="arrow-back" size={24} color="white" />
         </TouchableOpacity>
 
-        {/* DYNAMIC RESTAURANT NAME */}
-        <Text className="text-white text-2xl font-bold mb-5">
-          {name || 'Menu'}
-        </Text>
+        {/* RESTAURANT TITLE AND CART BUTTON */}
+        <View className="flex-row items-center justify-between mb-5">
+          <Text className="text-white text-2xl font-bold">
+            {name || 'Menu'}
+          </Text>
+          <TouchableOpacity
+            onPress={() => orderSheetRef.current?.show()}
+            className="bg-purple-600 rounded-full px-4 py-2 flex-row items-center"
+          >
+            <Ionicons name="cart" size={20} color="white" />
+            <Text className="text-white font-bold ml-2">
+              {cartItems.length > 0 ? cartItems.length : 'Cart'}
+            </Text>
+          </TouchableOpacity>
+        </View>
 
         {/* MENU LIST */}
         {menuItems.length === 0 ? (
@@ -146,19 +157,6 @@ export default function MENU() {
           />
         )}
       </ScrollView>
-
-      {/* FIXED CART BUTTON AT BOTTOM */}
-      <View className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/20">
-        <TouchableOpacity
-          onPress={() => orderSheetRef.current?.show()}
-          className="bg-purple-600 h-16 rounded-xl items-center justify-center flex-row"
-        >
-          <Ionicons name="cart" size={24} color="white" />
-          <Text className="text-white text-lg font-bold ml-3">
-            View Cart {cartItems.length > 0 && `(${cartItems.length})`}
-          </Text>
-        </TouchableOpacity>
-      </View>
 
       {/* ORDER SHEET */}
       <OrderSheet
