@@ -18,10 +18,6 @@ export default function Index() {
       return;
     }
 
-    const handleGuestContinue = () => {
-      router.replace('/(tabs)/home');
-    }
-
     setLoading(true);
     try {
       await signIn(email, password);
@@ -32,6 +28,10 @@ export default function Index() {
     } finally {
       setLoading(false);
     }
+  }
+
+  const handleGuestContinue = () => {
+    router.replace('/(tabs)/home');
   }
 
   return (
@@ -110,22 +110,24 @@ export default function Index() {
             </Text>
           </TouchableOpacity>
 
-               <TouchableOpacity 
-            className="bg-purple-600 h-14 rounded-xl items-center justify-center shadow-md shadow-purple-200"
-            onPress={handleLogin}
-            disabled={loading}
+          
+
+          {/* Continue as Guest Button */}
+          <TouchableOpacity 
+            className="bg-gray-200 h-14 rounded-xl items-center justify-center mt-3"
+            onPress={handleGuestContinue}
           >
-            <Text className="text-white text-lg font-bold">
-              contiune as a guest
+            <Text className="text-gray-700 text-lg font-bold">
+              Continue as a Guest
             </Text>
           </TouchableOpacity>
           
           {/* SIGN UP BUTTON */}
           <TouchableOpacity 
-            className="mt-6 py-2" 
+            className="mt-6 py-2"
             onPress={() => {
-              sheetRef.current?.hide(); // Close panel first
-              router.push("/signup");   // Then go to signup page
+              sheetRef.current?.hide();
+              router.push("/signup");
             }}
           >
             <Text className="text-gray-500 text-center text-base">

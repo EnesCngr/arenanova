@@ -1,13 +1,85 @@
+import { Ionicons } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
+import { useRouter } from 'expo-router';
 import React from 'react';
-import { SafeAreaView, Text } from 'react-native';
+import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
+
+const RESTAURANTS = [
+  {
+    id: '1',
+    name: 'pizza hut',
+    category: 'Pizza • Fast Food',
+    image: 'https://via.placeholder.com/150',
+  },
+  {
+    id: '2',
+    name: 'Burger King',
+    category: 'Burgers • Fries',
+    image: 'https://via.placeholder.com/150',
+  },
+  {
+    id: '3',
+    name: 'Sushi grill',
+    category: 'Japanese • Sushi',
+    image: 'https://via.placeholder.com/150',
+  },
+];
 
 export default function Home() {
-  return (
-    <SafeAreaView className="flex-1 bg-gray-100 justify-center items-center">
-      <Text className="text-2xl font-bold text-gray-800">Welcome! 👋</Text>
-      <Text className="text-gray-500 mt-2">Home Feed</Text>
-    </SafeAreaView>
+  const router = useRouter();
 
-    
+  const goToMenu = (restaurant: any) => {
+    router.push({
+      pathname: '/(tabs)/MENU',
+      params: {
+        id: restaurant.id,
+        name: restaurant.name,
+      },
+    });
+  };
+
+  return (
+    <LinearGradient
+      colors={['#9f6eadbe', '#ac82b1c8', '#b61fbcb0']}
+      style={{ flex: 1 }}
+    >
+      <FlatList
+        contentContainerStyle={{ padding: 20, paddingTop: 60 }}
+        ListHeaderComponent={
+          <Text className="text-white text-3xl font-bold mb-6">
+            Restaurants
+          </Text>
+        }
+        data={RESTAURANTS}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            onPress={() => goToMenu(item)}
+            activeOpacity={0.8}
+            className="bg-white rounded-2xl mb-4 overflow-hidden"
+          >
+            <Image
+              source={{ uri: item.image }}
+              className="w-full h-40"
+            />
+
+            <View className="p-4">
+              <Text className="text-lg font-bold text-black">
+                {item.name}
+              </Text>
+
+              <Text className="text-sm text-gray-600 mb-2">
+                {item.category}
+              </Text>
+
+              <View className="flex-row items-center">
+                <Ionicons name="star" size={16} color="gold" />
+                <Text className="ml-1 text-gray-700">4.6</Text>
+              </View>
+            </View>
+          </TouchableOpacity>
+        )}
+      />
+    </LinearGradient>
   );
 }

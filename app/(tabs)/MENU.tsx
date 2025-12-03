@@ -1,18 +1,92 @@
-import { View, Text, TouchableOpacity } from 'react-native'
-import Animated, { useSharedValue } from 'react-native-reanimated'
+import { Ionicons } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
+import { useLocalSearchParams, useNavigation } from 'expo-router';
+import { FlatList, Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 
-import React, { useEffect } from 'react'
-import { useNavigation } from 'expo-router'
-import gesture from 'react-native-gesture-handler'
+const MENU_ITEMS = [
+  {
+    id: '1',
+    name: 'Cheese Burger',
+    description: 'Juicy beef burger with cheese',
+    price: '$8.99',
+    image: 'https://via.placeholder.com/100',
+  },
+  {
+    id: '2',
+    name: 'Fried Chicken',
+    description: 'Crispy golden chicken',
+    price: '$10.50',
+    image: 'https://via.placeholder.com/100',
+  },
+  {
+    id: '3',
+    name: 'Pepperoni Pizza',
+    description: 'Loaded with pepperoni & cheese',
+    price: '$12.99',
+    image: 'https://via.placeholder.com/100',
+  },
+];
 
+export default function MENU() {
+  const navigation = useNavigation();
+  const { name } = useLocalSearchParams();
 
-const MENU = () => {
   return (
-    <View>
-        
+    <LinearGradient
+      colors={['#9f6eadbe', '#ac82b1c8', '#b61fbcb0']}
+      style={{ flex: 1 }}
+    >
+      <ScrollView className="pt-10 px-5" contentContainerStyle={{ flexGrow: 1 }}>
+        {/* BACK BUTTON */}
+        <TouchableOpacity 
+          className="mb-5"
+          onPress={() => navigation.goBack()}
+        >
+          <Ionicons name="arrow-back" size={24} color="white" />
+        </TouchableOpacity>
 
-    </View>
-  )
+        {/* DYNAMIC RESTAURANT NAME */}
+        <Text className="text-white text-2xl font-bold mb-5">
+          {name || 'Menu'}
+        </Text>
+
+        {/* MENU LIST */}
+        <FlatList
+          data={MENU_ITEMS}
+          keyExtractor={(item) => item.id}
+          scrollEnabled={false}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              activeOpacity={0.8}
+              className="bg-white rounded-2xl p-4 mb-4 flex-row items-center"
+            >
+              {/* FOOD IMAGE */}
+              <Image
+                source={{ uri: item.image }}
+                className="w-20 h-20 rounded-xl mr-4"
+              />
+
+              {/* FOOD INFO */}
+              <View className="flex-1">
+                <Text className="text-lg font-bold text-black">
+                  {item.name}
+                </Text>
+                <Text className="text-sm text-gray-600 mb-1">
+                  {item.description}
+                </Text>
+                <Text className="text-base font-bold text-purple-700">
+                  {item.price}
+                </Text>
+              </View>
+
+              {/* ADD BUTTON */}
+              <TouchableOpacity className="bg-purple-600 p-3 rounded-full">
+                <Ionicons name="add" size={20} color="white" />
+              </TouchableOpacity>
+            </TouchableOpacity>
+          )}
+        />
+      </ScrollView>
+    </LinearGradient>
+  );
 }
-
-export default MENU
