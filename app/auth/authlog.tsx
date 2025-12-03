@@ -185,7 +185,7 @@ export default function AuthScreen() {
 
             {/* Bottom Button */}
             <View className="items-center pb-8">
-                <TouchableOpacity 
+                <TouchableOpacity
                     onPress={() => setIsLoginPanelOpen(true)}
                     className="bg-white px-12 py-4 rounded-full"
                 >

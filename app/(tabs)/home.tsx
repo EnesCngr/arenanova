@@ -1,6 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useRouter } from 'expo-router';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import React from 'react';
 import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
 
@@ -44,6 +44,7 @@ const RESTAURANTS = [
 
 export default function Home() {
   const router = useRouter();
+  const { eventName, eventLocation } = useLocalSearchParams();
 
   const goToMenu = (restaurant: any) => {
     router.push({
@@ -64,9 +65,21 @@ export default function Home() {
       <FlatList
         contentContainerStyle={{ padding: 20, paddingTop: 60 }}
         ListHeaderComponent={
-          <Text className="text-white text-3xl font-bold mb-6">
-            Restaurants
-          </Text>
+          <>
+            {eventName && (
+              <View className="mb-4 bg-white/20 p-4 rounded-xl">
+                <Text className="text-white/70 text-sm mb-1">
+                  {eventLocation}
+                </Text>
+                <Text className="text-white text-xl font-bold">
+                  {eventName}
+                </Text>
+              </View>
+            )}
+            <Text className="text-white text-3xl font-bold mb-6">
+              Restaurants
+            </Text>
+          </>
         }
         data={RESTAURANTS}
         keyExtractor={(item) => item.id}

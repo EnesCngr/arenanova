@@ -36,8 +36,8 @@ export default function Signup() {
         phone,
       });
       Alert.alert('Success', 'Account created successfully!');
-      // Login successful, redirect to Home tabs
-      router.replace('/(tabs)/home'); 
+      // Login successful, redirect to Events tab
+      router.replace('/(tabs)/events'); 
     } catch (error: any) {
       Alert.alert('Sign Up Failed', error.message);
     } finally {
