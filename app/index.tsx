@@ -21,8 +21,8 @@ export default function Index() {
     setLoading(true);
     try {
       await signIn(email, password);
-      // If login successful, go to home tab
-      router.replace('/(tabs)/home'); 
+      // If login successful, go to events tab
+      router.replace('/(tabs)/events'); 
     } catch (error: any) {
       Alert.alert('Login Failed', error.message);
     } finally {
@@ -57,7 +57,7 @@ export default function Index() {
 
       {/* Bottom Button */}
       <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'center', paddingBottom: 80 }}>
-        <TouchableOpacity 
+        <TouchableOpacity
           onPress={() => sheetRef.current?.show()}
           className="bg-purple-600 px-10 py-5 rounded-full shadow-lg shadow-purple-500/50">
           <Text className="text-white text-xl font-bold">Let's Get Started 🚀</Text>
@@ -123,7 +123,7 @@ export default function Index() {
           </TouchableOpacity>
           
           {/* SIGN UP BUTTON */}
-          <TouchableOpacity 
+          <TouchableOpacity
             className="mt-6 py-2"
             onPress={() => {
               sheetRef.current?.hide();
