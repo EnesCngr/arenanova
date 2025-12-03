@@ -6,7 +6,7 @@ import ActionSheet, { ActionSheetRef } from 'react-native-actions-sheet';
 interface CartItem {
   id: string;
   name: string;
-  price: string;
+  price: number;
   quantity: number;
   image: string;
 }
@@ -22,7 +22,7 @@ const OrderSheet = forwardRef<ActionSheetRef, OrderSheetProps>(
   ({ cartItems, onRemoveItem, onUpdateQuantity, onCheckout }, ref) => {
     const calculateTotal = () => {
       return cartItems.reduce((total, item) => {
-        const price = parseFloat(item.price.replace('$', ''));
+        const price = typeof item.price === 'number' ? item.price : parseFloat(String(item.price).replace('$', ''));
         return total + price * item.quantity;
       }, 0).toFixed(2);
     };
@@ -61,7 +61,7 @@ const OrderSheet = forwardRef<ActionSheetRef, OrderSheetProps>(
                         {item.name}
                       </Text>
                       <Text className="text-sm font-semibold text-purple-600">
-                        {item.price}
+                        ${typeof item.price === 'number' ? item.price.toFixed(2) : item.price}
                       </Text>
                     </View>
 
