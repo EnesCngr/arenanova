@@ -1,7 +1,10 @@
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useLocalSearchParams, useNavigation } from 'expo-router';
-import { FlatList, Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { useRef, useState } from 'react';
+import { Alert, FlatList, Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { ActionSheetRef } from 'react-native-actions-sheet';
+import OrderSheet from '../../component/order';
 
 const MENU_ITEMS = [
   {
@@ -30,6 +33,44 @@ const MENU_ITEMS = [
 export default function MENU() {
   const navigation = useNavigation();
   const { name } = useLocalSearchParams();
+  const orderSheetRef = useRef<ActionSheetRef>(null);
+  const [cartItems, setCartItems] = useState<any[]>([]);
+
+  const addToCart = (item: any) => {
+    const existingItem = cartItems.find(cartItem => cartItem.id === item.id);
+    
+    if (existingItem) {
+      setCartItems(cartItems.map(cartItem =>
+        cartItem.id === item.id
+          ? { ...cartItem, quantity: cartItem.quantity + 1 }
+          : cartItem
+      ));
+    } else {
+      setCartItems([...cartItems, { ...item, quantity: 1 }]);
+    }
+    
+    orderSheetRef.current?.show();
+  };
+
+  const removeFromCart = (id: string) => {
+    setCartItems(cartItems.filter(item => item.id !== id));
+  };
+
+  const updateQuantity = (id: string, quantity: number) => {
+    if (quantity < 1) {
+      removeFromCart(id);
+      return;
+    }
+    setCartItems(cartItems.map(item =>
+      item.id === id ? { ...item, quantity } : item
+    ));
+  };
+
+  const handleCheckout = () => {
+    Alert.alert('Checkout', 'Order placed successfully!');
+    setCartItems([]);
+    orderSheetRef.current?.hide();
+  };
 
   return (
     <LinearGradient
@@ -80,13 +121,38 @@ export default function MENU() {
               </View>
 
               {/* ADD BUTTON */}
-              <TouchableOpacity className="bg-purple-600 p-3 rounded-full">
+              <TouchableOpacity 
+                className="bg-purple-600 p-3 rounded-full"
+                onPress={() => addToCart(item)}
+              >
                 <Ionicons name="add" size={20} color="white" />
               </TouchableOpacity>
             </TouchableOpacity>
           )}
         />
       </ScrollView>
+
+      {/* CART BUTTON */}
+      {cartItems.length > 0 && (
+        <TouchableOpacity
+          onPress={() => orderSheetRef.current?.show()}
+          className="absolute bottom-6 right-6 bg-purple-600 w-16 h-16 rounded-full items-center justify-center shadow-lg"
+        >
+          <Ionicons name="cart" size={24} color="white" />
+          <View className="absolute -top-2 -right-2 bg-red-500 w-6 h-6 rounded-full items-center justify-center">
+            <Text className="text-white text-xs font-bold">{cartItems.length}</Text>
+          </View>
+        </TouchableOpacity>
+      )}
+
+      {/* ORDER SHEET */}
+      <OrderSheet
+        ref={orderSheetRef}
+        cartItems={cartItems}
+        onRemoveItem={removeFromCart}
+        onUpdateQuantity={updateQuantity}
+        onCheckout={handleCheckout}
+      />
     </LinearGradient>
   );
 }
