@@ -7,21 +7,38 @@ import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
 const RESTAURANTS = [
   {
     id: '1',
-    name: 'pizza hut',
-    category: 'Pizza • Fast Food',
-    image: 'https://via.placeholder.com/150',
+    name: 'Pizza Hut',
+    storeid: 'pizza',
+    category: 'Italian • Pizza',
+    image: 'https://via.placeholder.com/150?text=Pizza',
   },
   {
     id: '2',
-    name: 'Burger King',
-    category: 'Burgers • Fries',
-    image: 'https://via.placeholder.com/150',
+    name: 'Sushi Express',
+    storeid: 'sushi',
+    category: 'Japanese • Sushi',
+    image: 'https://via.placeholder.com/150?text=Sushi',
   },
   {
     id: '3',
-    name: 'Sushi grill',
-    category: 'Japanese • Sushi',
-    image: 'https://via.placeholder.com/150',
+    name: 'Cafe Bliss',
+    storeid: 'cafe',
+    category: 'Coffee • Cafe',
+    image: 'https://via.placeholder.com/150?text=Cafe',
+  },
+  {
+    id: '4',
+    name: 'Ice Cream Dream',
+    storeid: 'ice',
+    category: 'Dessert • Ice Cream',
+    image: 'https://via.placeholder.com/150?text=IceCream',
+  },
+  {
+    id: '5',
+    name: 'Burger Kingdom',
+    storeid: 'burger',
+    category: 'American • Burgers',
+    image: 'https://via.placeholder.com/150?text=Burger',
   },
 ];
 
@@ -34,6 +51,7 @@ export default function Home() {
       pathname: '/(tabs)/MENU',
       params: {
         id: restaurant.id,
+        storeid: restaurant.storeid,
         name: restaurant.name,
       },
     });
@@ -85,9 +103,11 @@ export default function Home() {
                 {item.category}
               </Text>
 
-              <View className="flex-row items-center">
-                <Ionicons name="star" size={16} color="gold" />
-                <Text className="ml-1 text-gray-700">4.6</Text>
+              <View className="flex-row items-center justify-between">
+                <View className="flex-row items-center">
+                  <Ionicons name="star" size={16} color="gold" />
+                  <Text className="ml-1 text-gray-700">4.6</Text>
+                </View>
               </View>
             </View>
           </TouchableOpacity>

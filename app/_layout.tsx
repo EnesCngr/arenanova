@@ -5,17 +5,22 @@ export default function RootLayout() {
   return (
     <Stack>
       <Stack.Screen 
+        name="index" 
+        options={{ headerShown: false }} 
+      />
+
+      <Stack.Screen 
         name="(tabs)" 
         options={{ headerShown: false }} 
       />
 
       <Stack.Screen 
-        name="(signup)" 
+        name="signup" 
         options={{ headerShown: false }} 
       />
 
       <Stack.Screen 
-        name="index" 
+        name="auth/authlog" 
         options={{ headerShown: false }} 
       />
     </Stack>
