@@ -6,38 +6,78 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        headerShown: false, // Üst başlıkları gizle
+        headerShown: false, 
         tabBarActiveTintColor: '#7c3aed', // Aktif renk (Mor)
         tabBarInactiveTintColor: 'gray',  // Pasif renk
         tabBarStyle: {
           backgroundColor: '#ffffff',
           borderTopWidth: 0,
-          elevation: 5, // Android gölgesi
-          height: 60,
+          elevation: 5, 
+          shadowColor: '#000',
+          shadowOpacity: 0.1,
+          shadowRadius: 10,
+          height: 65, 
           paddingBottom: 10,
           paddingTop: 10,
         },
+        tabBarLabelStyle: {
+          fontSize: 12,
+          fontWeight: '600',
+        }
       }}
     >
+      {/* 1. Main Page */}
       <Tabs.Screen
         name="home"
         options={{
-          title: 'Ana Sayfa',
+          title: 'Home',
           tabBarIcon: ({ color, focused }) => (
-            <Ionicons name={focused ? "home" : "home-outline"} size={24} color={color} />
+            <Ionicons name={focused ? "home" : "home-outline"} size={25} color={color} />
           ),
         }}
       />
+
+      {/* 2. Events */}
+      <Tabs.Screen
+        name="events"
+        options={{
+          title: 'Events',
+          tabBarIcon: ({ color, focused }) => (
+            <Ionicons name={focused ? "calendar" : "calendar-outline"} size={25} color={color} />
+          ),
+        }}
+      />
+
+      {/* 3. MENU */}
+      <Tabs.Screen
+        name="MENU"
+        options={{
+          title: 'Menu',
+          tabBarIcon: ({ color, focused }) => (
+            <Ionicons name={focused ? "fast-food" : "fast-food-outline"} size={25} color={color} />
+          ),
+        }}
+      />
+
+      {/* 4. Profile */}
       <Tabs.Screen
         name="profile"
         options={{
-          title: 'Profile',
+          title: 'Profile', // Ekranda görünecek isim (Büyük Harfle)
           tabBarIcon: ({ color, focused }) => (
-            <Ionicons name={focused ? "person" : "person-outline"} size={24} color={color} />
+            // İkonu değiştirdim, görünürlüğü artsın
+            <Ionicons name={focused ? "person-circle" : "person-circle-outline"} size={26} color={color} />
           ),
         }}
       />
+
+      {/* Timetables Gizle */}
+      <Tabs.Screen
+        name="timetables"
+        options={{
+          href: null,
+        }}
+      />
     </Tabs>
-    
   );
 }
