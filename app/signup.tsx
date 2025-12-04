@@ -1,7 +1,7 @@
 import { ResizeMode, Video } from 'expo-av';
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
-import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Alert, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { signUp } from '../lib/auth';
 
 export default function Signup() {
@@ -59,13 +59,21 @@ export default function Signup() {
       {/* Overlay */}
       <View style={{ ...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(0,0,0,0.6)' }} />
 
-      <View className="flex-1 justify-center px-6">
+      <KeyboardAvoidingView 
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={{ flex: 1 }}
+      >
+        <ScrollView 
+          contentContainerStyle={{ flexGrow: 1, justifyContent: 'center', paddingHorizontal: 24 }}
+          keyboardShouldPersistTaps="handled"
+        >
         <Text className="text-4xl font-bold text-white mb-2 text-center">Join Us</Text>
         <Text className="text-gray-300 mb-8 text-center">Enter the world of Yumfest</Text>
 
         {/* Form Fields */}
         <View className="space-y-4">
             {/* First Name */}
+            <Text className="text-white text-sm mb-2">First Name</Text>
             <TextInput
             placeholder="First Name"
             placeholderTextColor="#9ca3af"
@@ -75,6 +83,7 @@ export default function Signup() {
             />
 
             {/* Last Name */}
+            <Text className="text-white text-sm mb-2">Last Name</Text>
             <TextInput
             placeholder="Last Name"
             placeholderTextColor="#9ca3af"
@@ -84,6 +93,7 @@ export default function Signup() {
             />
 
             {/* Email */}
+            <Text className="text-white text-sm mb-2">Email Address</Text>
             <TextInput
             placeholder="Email Address"
             placeholderTextColor="#9ca3af"
@@ -95,6 +105,7 @@ export default function Signup() {
             />
 
             {/* Phone */}
+            <Text className="text-white text-sm mb-2">Phone Number (optional)</Text>
             <TextInput
             placeholder="Phone Number (optional)"
             placeholderTextColor="#9ca3af"
@@ -105,6 +116,7 @@ export default function Signup() {
             />
 
             {/* Password */}
+            <Text className="text-white text-sm mb-2">Password</Text>
             <TextInput
             placeholder="Password"
             placeholderTextColor="#9ca3af"
@@ -115,6 +127,7 @@ export default function Signup() {
             />
 
             {/* Confirm Password */}
+            <Text className="text-white text-sm mb-2">Confirm Password</Text>
             <TextInput
             placeholder="Confirm Password"
             placeholderTextColor="#9ca3af"
@@ -138,14 +151,15 @@ export default function Signup() {
 
         {/* Back Button */}
         <TouchableOpacity 
-          className="mt-6 py-2"
+          className="mt-6 py-2 mb-8"
           onPress={() => router.back()}
         >
           <Text className="text-white text-center font-medium">
             Already have an account? <Text className="text-purple-400 font-bold">Login</Text>
           </Text>
         </TouchableOpacity>
-      </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
     </View>
   );
 }
