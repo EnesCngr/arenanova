@@ -36,15 +36,12 @@ export default function MENU() {
 
   useEffect(() => {
     loadMenu();
-  }, [safeStoreId]);
+  }, [safeStoreName]);
 
   const loadMenu = async () => {
     try {
       setLoading(true);
-      // If ID is generic, fetch a default category (e.g., pizza) so the list isn't empty
-      const fetchId = safeStoreId === 'general_store_id' ? 'pizza' : safeStoreId;
-      
-      const items = await getMenuByRestaurant(fetchId);
+      const items = await getMenuByRestaurant(safeStoreName);
       setMenuItems(items);
     } catch (error) {
       console.error('Error loading menu:', error);

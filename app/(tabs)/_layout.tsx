@@ -70,7 +70,18 @@ export default function TabLayout() {
         }}
       />
 
-      {/* 5. Profile */}
+      {/* 5. Map */}
+      <Tabs.Screen
+        name="map"
+        options={{
+          title: 'Map',
+          tabBarIcon: ({ color, focused }) => (
+            <Ionicons name={focused ? "map" : "map-outline"} size={25} color={color} />
+          ),
+        }}
+      />
+
+      {/* 6. Profile */}
       <Tabs.Screen
         name="profile"
         options={{
