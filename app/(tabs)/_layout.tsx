@@ -59,13 +59,23 @@ export default function TabLayout() {
         }}
       />
 
-      {/* 4. Profile */}
+      {/* 4. Orders Tracking */}
+      <Tabs.Screen
+        name="orders"
+        options={{
+          title: 'Orders',
+          tabBarIcon: ({ color, focused }) => (
+            <Ionicons name={focused ? "bag" : "bag-outline"} size={25} color={color} />
+          ),
+        }}
+      />
+
+      {/* 5. Profile */}
       <Tabs.Screen
         name="profile"
         options={{
-          title: 'Profile', // Ekranda görünecek isim (Büyük Harfle)
+          title: 'Profile',
           tabBarIcon: ({ color, focused }) => (
-            // İkonu değiştirdim, görünürlüğü artsın
             <Ionicons name={focused ? "person-circle" : "person-circle-outline"} size={26} color={color} />
           ),
         }}
