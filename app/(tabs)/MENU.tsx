@@ -23,8 +23,8 @@ export default function MENU() {
   const nameRaw = params.name;
 
   // Set safe defaults to prevent database errors
-  const safeStoreId = Array.isArray(storeidRaw) ? storeidRaw[0] : (storeidRaw || 'general_store_id');
-  const safeStoreName = Array.isArray(nameRaw) ? nameRaw[0] : (nameRaw || 'General Menu');
+  const safeStoreId = Array.isArray(storeidRaw) ? storeidRaw[0] : (storeidRaw || 'pizza');
+  const safeStoreName = Array.isArray(nameRaw) ? nameRaw[0] : (nameRaw || 'Pizza Hut');
 
   const orderSheetRef = useRef<ActionSheetRef>(null);
   const { initPaymentSheet, presentPaymentSheet } = useStripe();
@@ -36,12 +36,12 @@ export default function MENU() {
 
   useEffect(() => {
     loadMenu();
-  }, [safeStoreName]);
+  }, [safeStoreId]);
 
   const loadMenu = async () => {
     try {
       setLoading(true);
-      const items = await getMenuByRestaurant(safeStoreName);
+      const items = await getMenuByRestaurant(safeStoreId);
       setMenuItems(items);
     } catch (error) {
       console.error('Error loading menu:', error);
