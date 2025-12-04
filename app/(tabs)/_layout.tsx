@@ -26,18 +26,8 @@ export default function TabLayout() {
         }
       }}
     >
-      {/* 1. Main Page */}
-      <Tabs.Screen
-        name="home"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color, focused }) => (
-            <Ionicons name={focused ? "home" : "home-outline"} size={25} color={color} />
-          ),
-        }}
-      />
 
-      {/* 2. Events */}
+      {/* 1 Events */}
       <Tabs.Screen
         name="events"
         options={{
@@ -47,15 +37,24 @@ export default function TabLayout() {
           ),
         }}
       />
+      
+      {/* 2 resturants Home */}
+
+       <Tabs.Screen
+        name="home"
+        options={{
+          title: 'resturants',
+          tabBarIcon: ({ color, focused }) => (
+            <Ionicons name={focused ? "fast-food" : "fast-food-outline"} size={25} color={color} />
+          ),
+        }}
+      />
 
       {/* 3. MENU */}
       <Tabs.Screen
         name="MENU"
         options={{
-          title: 'Menu',
-          tabBarIcon: ({ color, focused }) => (
-            <Ionicons name={focused ? "fast-food" : "fast-food-outline"} size={25} color={color} />
-          ),
+          href: null,
         }}
       />
 

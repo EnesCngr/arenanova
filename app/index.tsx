@@ -31,7 +31,7 @@ export default function Index() {
   }
 
   const handleGuestContinue = () => {
-    router.replace('/(tabs)/home');
+    router.replace('/(tabs)/events');
   }
 
   return (
@@ -60,11 +60,11 @@ export default function Index() {
         <TouchableOpacity
           onPress={() => sheetRef.current?.show()}
           className="bg-purple-600 px-10 py-5 rounded-full shadow-lg shadow-purple-500/50">
-          <Text className="text-white text-xl font-bold">Let's Get Started 🚀</Text>
+          <Text className="text-white text-xl font-bold">Let's Get Started</Text>
         </TouchableOpacity>
       </View>
 
-      {/* LOGIN PANEL (Action Sheet) */}
+      {/* LOGIN PANEL (Action Sheet) */}     
       <ActionSheet
         ref={sheetRef}
         gestureEnabled={true}
