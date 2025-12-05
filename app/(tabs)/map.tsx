@@ -41,7 +41,7 @@ export default function MapScreen() {
         {/* Map Image */}
         <View className="rounded-2xl overflow-hidden bg-white shadow-lg mb-6">
           <Image
-            source={require('../../photo/map.jpg')}
+            source={require('../../photo/map.jpeg')}
             style={{ width: '100%', height: 280, resizeMode: 'cover' }}
           />
         </View>
