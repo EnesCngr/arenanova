@@ -74,12 +74,19 @@ function EventCard({ item, index, scrollX, onPress }: EventCardProps) {
     const imageTranslateX = interpolate(
       scrollX.value,
       [index - 1, index, index + 1],
-      [-50, 0, 50],
+      [-150, 0,150],
+      "clamp"
+    );
+
+    const imageScale = interpolate(
+      scrollX.value,
+      [index - 1, index, index + 1],
+      [1, 1.3, 1 ],
       "clamp"
     );
 
     return {
-      transform: [{ translateX: imageTranslateX }],
+      transform: [{ translateX: imageTranslateX }, { scale: imageScale }],
     };
   });
 

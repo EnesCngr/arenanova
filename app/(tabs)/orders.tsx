@@ -82,7 +82,7 @@ export default function Orders() {
   if (loading) {
     return (
       <LinearGradient
-        colors={['#9f6eadbe', '#ac82b1c8', '#b61fbcb0']}
+        colors={['#514d53be', '#484646c8', '#050405b0']}
         style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
       >
         <ActivityIndicator size="large" color="white" />
@@ -92,7 +92,7 @@ export default function Orders() {
 
   return (
     <LinearGradient
-      colors={['#9f6eadbe', '#ac82b1c8', '#b61fbcb0']}
+      colors={['#4a4a4dbe', '#2c222dc8', '#1a1a27b0']}
       style={{ flex: 1 }}
     >
       <FlatList

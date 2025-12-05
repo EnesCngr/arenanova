@@ -59,7 +59,7 @@ export default function Home() {
 
   return (
     <LinearGradient
-      colors={['#9f6eadbe', '#ac82b1c8', '#b61fbcb0']}
+      colors={['#010101be', '#000000c8', '#050405b0']}
       style={{ flex: 1 }}
     >
       <FlatList

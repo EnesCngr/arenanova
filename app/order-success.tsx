@@ -139,7 +139,7 @@ export default function OrderSuccess() {
 
         {/* Continue Shopping Button */}
         <TouchableOpacity
-            onPress={() => router.push('/(tabs)/home')}
+            onPress={() => router.replace('/(tabs)/home')}
             style={{ backgroundColor: '#9333ea', padding: 18, borderRadius: 15, marginTop: 30, shadowColor: '#9333ea', shadowOpacity: 0.3, shadowRadius: 10 }}
         >
             <Text style={{ color: 'white', textAlign: 'center', fontWeight: 'bold', fontSize: 16 }}>

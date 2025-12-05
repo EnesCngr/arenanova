@@ -33,7 +33,9 @@ export default function MapScreen() {
   const currentRestaurant = restaurants.find(r => r.id === selectedRestaurant);
 
   return (
-    <LinearGradient colors={['#9f6eadbe', '#ac82b1c8', '#b61fbcb0']} style={{ flex: 1 }}>
+    <LinearGradient       colors={['#514e4ebe', '#484646c8', '#050405b0']}
+      style={{ flex: 1 }}
+    >
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ padding: 20, paddingTop: 40 }}>
         {/* Header */}
         <Text className="text-white text-3xl font-bold mb-6">Restaurant Locations</Text>

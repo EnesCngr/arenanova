@@ -192,7 +192,7 @@ export default function MENU() {
   }
 
   return (
-    <LinearGradient colors={['#9f6eadbe', '#ac82b1c8', '#b61fbcb0']} style={{ flex: 1 }}>
+    <LinearGradient colors={['#1d1c1dbe', '#1e1e1ec8', '#404040b0']} style={{ flex: 1 }}>
       <ScrollView className="pt-10 px-5 pb-24" contentContainerStyle={{ flexGrow: 1 }}>
         {/* Back Button */}
         <TouchableOpacity className="mb-5" onPress={() => navigation.goBack()}>
